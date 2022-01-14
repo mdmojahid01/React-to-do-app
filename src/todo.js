@@ -1,4 +1,4 @@
-import React, {useState,useEffect } from "react";
+import React, {useState } from "react";
 import './App.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,9 +9,9 @@ function Todo(){
     let [inputitem, setInputItem] = useState("");
     let [itemList, setItemList] = useState([]);
 
-    useEffect(() => {
-        document.getElementById("input").focus();
-    })
+    // useEffect(() => {
+    //     document.getElementById("input").focus();
+    // })
 
 
    let  changeItem = (e) => {

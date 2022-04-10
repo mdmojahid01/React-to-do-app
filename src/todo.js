@@ -55,7 +55,7 @@ function Todo() {
       <div className="center-div">
         <br />
         <h1 className="heading">
-          <img src={img1} width="23px" alt="logo" />
+          {/* <img src={img1} width="23px" alt="logo" /> */}
           To Do List
         </h1>
 

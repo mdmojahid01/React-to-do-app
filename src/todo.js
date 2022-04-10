@@ -4,51 +4,18 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-// faCheckCircle
 function Todo(){
     let [inputitem, setInputItem] = useState("");
     let [itemList, setItemList] = useState([]);
-
-    // useEffect(() => {
-    //     document.getElementById("input").focus();
-    // })
-
-
    let  changeItem = (e) => {
       setInputItem(e.target.value);
     }
-    // let removeAlldone = () => {
-    //     itemList.forEach((v, index) => {
-    //         let i = "id" + index;
-    //         let underline = document.getElementById(i);
-    //         underline.classList.remove("line-through");
-    //     })
-        
-    // }
-    
-    // element of li tag:=> <FontAwesomeIcon title="Done" onClick={(e) =>done(index)} id={index} className='check' icon={faCheckCircle} />
-    // let done = (index) => {
-    //         let i = "id" + index;
-
-    //     if (index != null) {
-    //         let underline = document.getElementById(i);
-    //         underline.classList.add("line-through");
-    //     }
-    // }
     let removeItem = (id) => {
-//   let i = "id" + id;
-//         let underline = document.getElementById(i);
-//         underline.classList.remove("line-through");
- setItemList((oldItem) => {
-    
-       return oldItem.filter((arrItem, index) => {
-            return index !== id;
-       })
-     
-    })
-    
-        // done(id)
-    }
+        setItemList((oldItem) => {
+            return oldItem.filter((arrItem, index) => {
+                    return index !== id;
+                    })
+                })}
     let add = (e) => {
         // console.log(e.key);
         if (e.key === "Enter") {
@@ -74,13 +41,7 @@ function Todo(){
     let deleteAll = () => {
         setItemList([]);
     }
-    let deleteCheck = (e) => {
-        // console.log(e);
-        if (e.key === "Delete") {
-
-            deleteAll();
-      }
-    }
+    let deleteCheck = (e) => {if (e.key === "Delete") {deleteAll();}}
     document.addEventListener("keydown", changeItem);
     document.addEventListener("keydown", deleteCheck);
    

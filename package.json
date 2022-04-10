@@ -1,8 +1,6 @@
 {
   "name": "to-do-list",
-  
-  "homepage": "https://mojahidmd92.github.io/React-to-do-app",
-  
+  "homepage": "https://mojahidmd92.github.io/todo-with-page-and-code",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,10 +17,8 @@
     "web-vitals": "^2.1.3"
   },
   "scripts": {
-   
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
-
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

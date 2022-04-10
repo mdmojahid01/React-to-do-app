@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import img1 from "./todolist.png";
+// import img1 from "./todolist.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";

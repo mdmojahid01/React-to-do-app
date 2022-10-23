@@ -1,15 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-// import img1 from "./todolist.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FaReact } from "react-icons/fa";
 
 function Todo() {
   let [inputitem, setInputItem] = useState("");
   let [itemList, setItemList] = useState([]);
+  // -----------------------------------------------
   let changeItem = (e) => {
     setInputItem(e.target.value);
+  };
+  let addItems = () => {
+    if (inputitem !== "") {
+      setItemList((oldItem) => {
+        return [...oldItem, { title: inputitem, status: false }];
+      });
+      setInputItem("");
+    }
+  };
+  let add = (e) => {
+    if (e.key === "Enter") {
+      addItems();
+    }
+  };
+  let completeTask = (id) => {
+    setItemList((oldItem) => {
+      oldItem[id].status = true;
+      return [...oldItem];
+    });
   };
   let removeItem = (id) => {
     setItemList((oldItem) => {
@@ -18,46 +37,24 @@ function Todo() {
       });
     });
   };
-  let add = (e) => {
-    // console.log(e.key);
-    if (e.key === "Enter") {
-      if (inputitem !== "") {
-        setItemList((oldItem) => {
-          return [...oldItem, inputitem];
-        });
-        setInputItem("");
-      }
-    }
-  };
-
-  let addItems = () => {
-    if (inputitem !== "") {
-      setItemList((oldItem) => {
-        return [...oldItem, inputitem];
-      });
-      setInputItem("");
-    }
-  };
-
   let deleteAll = () => {
     setItemList([]);
   };
-  let deleteCheck = (e) => {
-    if (e.key === "Delete") {
-      deleteAll();
-    }
-  };
-  document.addEventListener("keydown", changeItem);
-  document.addEventListener("keydown", deleteCheck);
+  // ---------------------------- Update LocalStorage --------------------------------------
+  useEffect(() => {
+    let data = localStorage.getItem("todoList");
+    data === null ? setItemList([]) : setItemList(JSON.parse(data));
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(itemList));
+  }, [itemList]);
+  // ========================== JSX ================================
   return (
     <div className="main-div">
       <div className="center-div">
         <br />
-        <h1 className="heading">
-          {/* <img src={img1} width="23px" alt="logo" /> */}
-          To Do List
-        </h1>
+        <h1 className="heading">To Do List</h1>
 
         <div className="inpbtn">
           <input
@@ -74,36 +71,57 @@ function Todo() {
             title="Add item in bucket."
             onClick={addItems}
           >
-            +
+            Add
           </button>
-          <FontAwesomeIcon
-            title="Delete all Task."
-            className="delete"
+          <button
+            className="btnadd"
+            title="Delete All Task"
             onClick={deleteAll}
-            icon={faTrash}
-          />
+          >
+            Remove All
+          </button>
         </div>
 
         <div className="all-list">
           {itemList.map((element, index) => {
             return (
               <div key={index} id={index} className="list-div">
-                <li className="list-item" id={"id" + index}>
-                  {element}
+                <li
+                  className={`list-item ${
+                    element.status ? "completed-task" : ""
+                  }`}
+                  id={"id" + index}
+                >
+                  {element.title}
                 </li>
                 <div className="icons">
-                  <FontAwesomeIcon
+                  <div
+                    title="Complete"
+                    onClick={(e) => completeTask(index)}
+                    className={`${
+                      element.status ? " check-complete" : "check  "
+                    }`}
+                  >
+                    <FontAwesomeIcon icon={faCheck} />
+                  </div>
+                  <div
                     title="Remove"
                     onClick={(e) => removeItem(index)}
                     className="remove"
-                    icon={faTrash}
-                  />
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
+      <p>
+        <a href="https://www.linkedin.com/in/mdmojahid01/" target="blank">
+          Made in <FaReact style={{ fontWeight: "600" }} /> By Md Mojahid
+        </a>
+      </p>
     </div>
   );
 }

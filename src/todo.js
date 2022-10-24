@@ -63,18 +63,23 @@ function Todo() {
             id="input"
             onKeyPress={add}
             value={inputitem}
-            placeholder="Add a Item"
+            placeholder="Type a item to add"
             className="input-text"
+            autoComplete="off"
           />
           <button
-            className="btnadd"
+            className={`btnadd ${
+              inputitem.length === 0 ? "disableBtn" : "btnadd"
+            }`}
             title="Add item in bucket."
             onClick={addItems}
           >
             Add
           </button>
           <button
-            className="btnadd"
+            className={`btnadd ${
+              itemList.length === 0 ? "disableBtn" : "btnadd"
+            }`}
             title="Delete All Task"
             onClick={deleteAll}
           >

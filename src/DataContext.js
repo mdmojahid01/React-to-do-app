@@ -5,7 +5,7 @@ import React, {
   useContext,
   useRef,
 } from "react";
-import { auth, db } from "./firebase";
+import { db } from "./firebase";
 import { AuthContext } from "./AuthContext";
 import {
   doc,

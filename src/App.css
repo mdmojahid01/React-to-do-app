@@ -356,6 +356,12 @@ input:focus-visible {
 
 
 /* =================== Responsive ============= */
+@media only screen and (max-width: 1470px) {
+  .login-div {
+    position: absolute;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .main-div {
     padding: 100px 50px 64px;
@@ -374,11 +380,11 @@ input:focus-visible {
 
 @media only screen and (max-width:650px) {
   .main-div {
-    padding: 50px 25px 14px;
+    padding: 25px 25px 14px;
   }
 
   .center-div {
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 175px);
   }
 
   .center-div>h1 {
@@ -408,11 +414,15 @@ input:focus-visible {
     width: 30%;
     gap: 10px;
   }
+
+  .login-div {
+    position: static;
+  }
 }
 
 @media only screen and (max-width:400px) {
   .main-div {
-    padding: 50px 10px 14px;
+    padding: 25px 10px 14px;
   }
 
   .icons {
@@ -421,8 +431,6 @@ input:focus-visible {
 }
 
 @media only screen and (max-width:300px) {
-
-
   .icons {
     gap: 0px;
   }

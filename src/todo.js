@@ -11,15 +11,7 @@ import Login from "./login";
 import { DataContext } from "./DataContext";
 import { auth, db } from "./firebase";
 import { AuthContext } from "./AuthContext";
-import {
-  doc,
-  updateDoc,
-  setDoc,
-  getDoc,
-  onSnapshot,
-  arrayUnion,
-  arrayRemove,
-} from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 function Todo() {
   let [inputitem, setInputItem] = useState("");
@@ -54,13 +46,19 @@ function Todo() {
       document.getElementById("load").classList.add("load");
       const userDataRef = doc(db, "userdata", currentUser.uid);
       await updateDoc(userDataRef, {
-        // pendind.....
+        data: arrayRemove(todoData[id]),
       }).then(() => {
         document.getElementById("load").classList.remove("load");
         setTodoData((oldItem) => {
           oldItem[id].status = true;
           return [...oldItem];
         });
+      });
+      document.getElementById("load").classList.add("load");
+      await updateDoc(userDataRef, {
+        data: arrayUnion(todoData[id]),
+      }).then(() => {
+        document.getElementById("load").classList.remove("load");
       });
     } else {
       setTodoData((oldItem) => {
